@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#123b66"><title>HPJC Mid-Term Marks Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top"><div class="brand"><img class="schoolLogo" src="logo.jpg" alt="Holy Public Group of Schools logo"><div><h1>Holy Public Junior College</h1><p>Mid-Term Examination Marks Portal</p></div></div><div id="userbar" hidden><span id="whoami"></span> <button id="logout" class="secondary">Sign out</button></div></header>
+  <main>
+    <section id="loginPanel" class="panel login"><h2>Sign in</h2><p>Use the account created for you by the portal administrator.</p><form id="loginForm"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label><button type="submit">Sign in securely</button><p id="loginMsg" class="msg" role="status"></p></form></section>
+    <section id="appPanel" hidden>
+      <div class="welcome"><div><h2 id="welcomeTitle">Marks entry</h2><p id="roleHint">Select your assigned class and subject.</p></div><span class="secure">Secure database connection</span></div>
+      <section class="panel"><h3>Marks entry</h3><div class="filters"><label>Examination<select id="examSelect" required></select></label><label>Class<select id="classSelect"><option value="class10">Class 10</option><option value="class12">Class 12</option></select></label><label>Subject<select id="subjectSelect" required></select></label><button id="loadStudents">Load students</button></div><p id="marksMsg" class="msg" role="status"></p><div class="tablewrap"><table><thead><tr><th>Roll No.</th><th>Student name</th><th>Marks</th><th>Remarks (optional)</th><th>Last entered by</th></tr></thead><tbody id="studentRows"><tr><td colspan="5" class="empty">Choose an examination, class and subject, then load students.</td></tr></tbody></table></div><div class="actions"><button id="saveMarks">Save marks</button><button id="exportMarks" class="secondary">Export visible marks CSV</button></div></section>
+      <section id="adminPanel" class="panel" hidden><h3>Administrator tools</h3><p class="muted">Admin tools are restricted by your database role. Import student CSV files with columns <code>Roll No</code> and <code>Student Name</code>.</p>
+        <div class="adminGrid">
+          <form id="studentImportForm" class="subpanel"><h4>Import students</h4><label>Class<select id="importClass"><option value="class10">Class 10</option><option value="class12">Class 12</option></select></label><label>CSV file<input id="studentCsv" type="file" accept=".csv,text/csv" required></label><button type="submit">Import student list</button><p class="msg" id="importMsg"></p></form>
+          <form id="examForm" class="subpanel"><h4>Create examination</h4><label>Examination name<input id="examName" value="Mid-Term Examination" required></label><label>Academic year<input id="academicYear" value="2026-27"></label><button type="submit">Create examination</button><p class="msg" id="examMsg"></p></form>
+          <form id="ruleForm" class="subpanel"><h4>Set maximum marks</h4><label>Examination<select id="ruleExam" required></select></label><label>Class<select id="ruleClass"><option value="class10">Class 10</option><option value="class12">Class 12</option></select></label><label>Subject<select id="ruleSubject" required></select></label><label>Maximum marks<input id="maxMarks" type="number" min="1" step="0.5" required></label><button type="submit">Save marks rule</button><p class="msg" id="ruleMsg"></p></form>
+          <form id="assignmentForm" class="subpanel"><h4>Assign teacher</h4><p class="muted small">Create the teacher under Authentication first, then enter their Auth User ID.</p><label>Teacher Auth User ID<input id="teacherId" placeholder="UUID from Authentication → Users" required></label><label>Class<select id="assignClass"><option value="class10">Class 10</option><option value="class12">Class 12</option></select></label><label>Subject<select id="assignSubject" required></select></label><button type="submit">Assign subject</button><p class="msg" id="assignMsg"></p></form>
+        </div>
+      </section>
+      <p class="footerNote">Student marks are saved to Supabase. Always sign out on shared computers.</p>
+    </section>
+    <div id="globalMsg" class="toast" role="status" hidden></div>
+  </main>
+  <footer>Holy Public Group of Schools · Authorized access only</footer>
+  <script type="module" src="app.js"></script>
+</body></html>
